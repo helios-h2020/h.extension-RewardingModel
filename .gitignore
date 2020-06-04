@@ -1,0 +1,14 @@
+# Project exclude paths
+*.iml
+.DS_Store
+.externalNativeBuild
+/local.properties
+/captures
+/.gradle/
+/app/build/
+/app/build/intermediates/javac/group14Debug/classes/
+/.idea/
+/build/
+/iosApp/Pods
+/iosApp/iosApp.xcworkspace/xcuserdata
+/iosApp/Podfile.lock
