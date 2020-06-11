@@ -16,7 +16,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId 'com.worldline.multiplatform'
+        applicationId 'com.worldline.helios.rewardingstub.multiplatform'
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1

@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.activity.HomeActivity">
+    tools:context="com.worldline.helios.rewardingstub.multiplatform.ui.view.activity.HomeActivity">
 
     <TextView
         android:id="@+id/forecastDataSample"
