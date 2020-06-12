@@ -42,6 +42,6 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
     }
 
     override fun showForecast(forecast: Forecast) {
-        forecastDataSample.text = forecast.toString()
+//        forecastDataSample.text = forecast.toString()
     }
 }

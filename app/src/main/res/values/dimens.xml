@@ -23,4 +23,6 @@
     <dimen name="stadium_image_width">200dp</dimen>
     <dimen name="player_image_size">50dp</dimen>
     <dimen name="squad_text_size">24sp</dimen>
+    <dimen name="vertical_layout_padding">10dp</dimen>
+    <dimen name="button_vertical_margin">20dp</dimen>
 </resources>
