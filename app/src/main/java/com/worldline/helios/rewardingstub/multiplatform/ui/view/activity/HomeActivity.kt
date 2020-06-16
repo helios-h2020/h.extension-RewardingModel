@@ -2,6 +2,7 @@ package com.worldline.helios.rewardingstub.multiplatform.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Button
 import com.worldline.helios.rewardingstub.multiplatform.R
 import com.worldline.helios.rewardingstub.multiplatform.domain.model.Forecast
 import com.worldline.helios.rewardingstub.multiplatform.ui.app.ACTIVITY_MODULE
@@ -20,7 +21,7 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
         fun intent(context: Context): Intent = Intent(context, HomeActivity::class.java)
     }
 
-    override val presenter: HomePresenter by instance()
+    override val presenter by instance<HomePresenter>()
     override val layoutResourceId: Int = R.layout.activity_home
     override val activityModule = Kodein.Module(ACTIVITY_MODULE) {
         bind<HomePresenter>() with provider {
@@ -39,6 +40,20 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
 
     override fun registerListeners() {
         // Do nothing
+        buttonRegister.setOnClickListener() { v ->
+            val intent = Intent(this, AuthActivity::class.java);
+            startActivity(intent);
+        }
+
+        buttonRecord.setOnClickListener() { v ->
+            val intent = Intent(this, RecordActivity::class.java);
+            startActivity(intent);
+        }
+
+        buttonCards.setOnClickListener() { v ->
+            val intent = Intent(this, CardsActivity::class.java);
+            startActivity(intent);
+        }
     }
 
     override fun showForecast(forecast: Forecast) {

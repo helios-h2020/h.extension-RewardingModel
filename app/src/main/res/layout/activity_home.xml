@@ -18,21 +18,21 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/button_register"
+            android:id="@+id/buttonRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_register"
             android:layout_marginVertical="@dimen/button_vertical_margin"/>
 
         <Button
-            android:id="@+id/button_record"
+            android:id="@+id/buttonRecord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_record"
             android:layout_marginVertical="@dimen/button_vertical_margin"/>
 
         <Button
-            android:id="@+id/button_cards"
+            android:id="@+id/buttonCards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_cards"
