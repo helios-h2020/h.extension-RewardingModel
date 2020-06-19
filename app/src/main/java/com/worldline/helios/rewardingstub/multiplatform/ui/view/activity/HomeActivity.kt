@@ -2,7 +2,9 @@ package com.worldline.helios.rewardingstub.multiplatform.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import com.worldline.helios.rewardingstub.multiplatform.R
 import com.worldline.helios.rewardingstub.multiplatform.domain.model.Forecast
 import com.worldline.helios.rewardingstub.multiplatform.ui.app.ACTIVITY_MODULE
@@ -16,6 +18,11 @@ import org.kodein.di.generic.provider
 
 
 class HomeActivity : RootActivity<HomeView>(), HomeView {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        presenter.removeToken()
+    }
 
     companion object {
         fun intent(context: Context): Intent = Intent(context, HomeActivity::class.java)
@@ -54,9 +61,14 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
             val intent = Intent(this, CardsActivity::class.java);
             startActivity(intent);
         }
+
+        buttonToken.setOnClickListener() { v ->
+            presenter.getToken()
+        }
     }
 
-    override fun showForecast(forecast: Forecast) {
-//        forecastDataSample.text = forecast.toString()
-    }
+        override fun showToken(token: String) {
+            Toast.makeText(applicationContext, token,Toast.LENGTH_SHORT).show()
+        }
+
 }

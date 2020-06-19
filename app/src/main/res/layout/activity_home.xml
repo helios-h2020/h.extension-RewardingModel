@@ -23,6 +23,12 @@
             android:layout_height="wrap_content"
             android:text="@string/button_register"
             android:layout_marginVertical="@dimen/button_vertical_margin"/>
+        <Button
+            android:id="@+id/buttonToken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_token"
+            android:layout_marginVertical="@dimen/button_vertical_margin"/>
 
         <Button
             android:id="@+id/buttonRecord"

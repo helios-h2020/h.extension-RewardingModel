@@ -1,24 +1,39 @@
 package com.worldline.helios.rewardingstub.multiplatform.data.datasource.local
 
 import com.russhwolf.settings.Settings
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Either
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Error
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Forecast
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Success
+import com.worldline.helios.rewardingstub.multiplatform.data.datasource.remote.RegisterDataResponse
+import com.worldline.helios.rewardingstub.multiplatform.domain.model.*
 import kotlinx.serialization.json.Json
 
 class CommonLocalDataSource(private val settings: Settings) : LocalDataSource {
 
     companion object {
-        private const val FORECAST_KEY = "FORECAST_KEY"
+        const val ACCESS_TOKEN = "access_token"
     }
 
-    override suspend fun saveForecast(forecast: Forecast): Either<Error, Success> {
+    override suspend fun getToken(): Either<Error, String> {
         return try {
-            settings.putString(FORECAST_KEY, Json.stringify(Forecast.serializer(), forecast))
-            Either.Right(Success)
+            Either.Right(settings.getString(ACCESS_TOKEN))
         } catch (e: Exception) {
             Either.Left(Error.IO(e.message ?: ""))
+        }
+    }
+
+    override suspend fun saveToken(registerDataResponse: RegisterDataResponse): Either<Error, Success> {
+        return try {
+            settings.putString(ACCESS_TOKEN, Json.stringify(RegisterDataResponse.serializer(), registerDataResponse))
+            Either.Right(Success)
+        } catch (e: Exception) {
+            Either.Left(Error.TokenNotSaved)
+        }
+    }
+
+    override suspend fun removeToken(): Either<Error, Success> {
+        return try {
+            settings.remove(ACCESS_TOKEN)
+            Either.Right(Success)
+        } catch (e: Exception) {
+            Either.Left(Error.TokenNotRemoved)
         }
     }
 }

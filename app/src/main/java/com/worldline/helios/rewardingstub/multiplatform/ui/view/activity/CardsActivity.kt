@@ -2,9 +2,7 @@ package com.worldline.helios.rewardingstub.multiplatform.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
-import android.widget.Button
 import com.worldline.helios.rewardingstub.multiplatform.R
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Forecast
 import com.worldline.helios.rewardingstub.multiplatform.ui.app.ACTIVITY_MODULE
 import com.worldline.helios.rewardingstub.multiplatform.ui.presenter.CardsPresenter
 import com.worldline.helios.rewardingstub.multiplatform.ui.presenter.CardsView

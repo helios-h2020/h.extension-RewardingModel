@@ -14,19 +14,30 @@ class HomePresenter(
 ) : Presenter<HomeView>(errorHandler, executor, view) {
 
     override fun attach() {
-        getForecast("Badajoz")
+
     }
 
-    private fun getForecast(city: String) {
+    fun getToken() {
         scope.launch {
-            execute { repository.getForecast(city) }.fold(
-                error = { onRetry(it) { getForecast(city) } },
-                success = { view.showForecast(it) }
+            execute { repository.getToken() }.fold(
+                error = { onRetry(it) { getToken() } },
+                success = { view.showToken(it) }
             )
         }
     }
+
+    fun removeToken() {
+        scope.launch {
+            execute { repository.removeToken() }.fold(
+                    error = { onRetry(it) { removeToken() } },
+                    success = {  }
+                )
+
+        }
+    }
+
 }
 
 interface HomeView : View {
-    fun showForecast(forecast: Forecast)
+    fun showToken(token: String)
 }

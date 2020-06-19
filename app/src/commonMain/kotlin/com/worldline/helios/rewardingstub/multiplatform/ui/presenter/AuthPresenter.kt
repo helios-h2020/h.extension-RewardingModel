@@ -15,8 +15,17 @@ class AuthPresenter(
     override fun attach() {
 
     }
+
+    fun registerUser(userID: String, context: String) {
+        scope.launch {
+            execute { repository.registerUser(userID, context) }.fold(
+                error = { println("error") },
+                success = { view.showSuccess() }
+            )
+        }
+    }
 }
 
 interface AuthView : View {
-
+    fun showSuccess()
 }
