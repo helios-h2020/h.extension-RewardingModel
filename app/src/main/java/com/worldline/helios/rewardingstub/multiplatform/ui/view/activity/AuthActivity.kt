@@ -2,10 +2,8 @@ package com.worldline.helios.rewardingstub.multiplatform.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.widget.Button
+import android.widget.Toast
 import com.worldline.helios.rewardingstub.multiplatform.R
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Forecast
 import com.worldline.helios.rewardingstub.multiplatform.ui.app.ACTIVITY_MODULE
 import com.worldline.helios.rewardingstub.multiplatform.ui.presenter.AuthPresenter
 import com.worldline.helios.rewardingstub.multiplatform.ui.presenter.AuthView
@@ -46,7 +44,13 @@ class AuthActivity : RootActivity<AuthView>(), AuthView {
 
     override fun registerListeners() {
         // Do nothing
+        button_sendAuth.setOnClickListener() { v ->
+            presenter.registerUser(userID = editUserID.text.toString(), context = editContext.text.toString());
+        }
+    }
 
+    override fun showSuccess() {
+        Toast.makeText(applicationContext,"User registered.",Toast.LENGTH_SHORT).show()
     }
 
 }

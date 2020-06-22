@@ -2,12 +2,12 @@ package com.worldline.helios.rewardingstub.multiplatform.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
-import android.widget.Button
+import android.widget.Toast
 import com.worldline.helios.rewardingstub.multiplatform.R
-import com.worldline.helios.rewardingstub.multiplatform.domain.model.Forecast
 import com.worldline.helios.rewardingstub.multiplatform.ui.app.ACTIVITY_MODULE
 import com.worldline.helios.rewardingstub.multiplatform.ui.presenter.RecordPresenter
 import com.worldline.helios.rewardingstub.multiplatform.ui.presenter.RecordView
+import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.android.synthetic.main.activity_record.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -40,7 +40,13 @@ class RecordActivity : RootActivity<RecordView>(), RecordView {
 
     override fun registerListeners() {
         // Do nothing
+        button_sendActivity.setOnClickListener() { v ->
+            presenter.registerActivity(action = editAction.text.toString(), date = editDate.text.toString());
+        }
+    }
 
+    override fun showSuccess() {
+        Toast.makeText(applicationContext,"Activity registered.", Toast.LENGTH_SHORT).show()
     }
 
 }
