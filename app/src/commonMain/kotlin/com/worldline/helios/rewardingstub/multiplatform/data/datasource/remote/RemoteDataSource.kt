@@ -5,4 +5,5 @@ import com.worldline.helios.rewardingstub.multiplatform.data.datasource.remote.*
 
 interface RemoteDataSource {
     suspend fun registerUser(userID: String, context: String): Either<Error, RegisterDataResponse>
+    suspend fun registerActivity(action: String, date: String): Either<Error, Success>
 }

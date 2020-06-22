@@ -1,5 +1,6 @@
 package com.worldline.helios.rewardingstub.multiplatform.data.datasource.remote
 
+import com.worldline.helios.rewardingstub.multiplatform.data.datasource.local.LocalDataSource
 import com.worldline.helios.rewardingstub.multiplatform.domain.model.*
 import io.ktor.client.HttpClient
 import io.ktor.client.features.ClientRequestException
@@ -11,15 +12,17 @@ import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.post
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.takeFrom
 import io.ktor.util.date.GMTDate
 
-class CommonRemoteDataSource : RemoteDataSource {
+class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSource {
 
     companion object {
         const val END_POINT_HELIOS = "https://devel3.tempos21.com"
+        private const val TOKEN_HEADER = "Authorization"
     }
 
     private val client = HttpClient {
@@ -38,6 +41,11 @@ class CommonRemoteDataSource : RemoteDataSource {
         install(JsonFeature) {
             serializer = KotlinxSerializer()
         }
+
+        install(TokenFeature) {
+            tokenHeaderName = TOKEN_HEADER
+            tokenProvider = localDataSource
+        }
     }
 
     override suspend fun registerUser(userID: String, context: String): Either<Error, RegisterDataResponse> = execute {
@@ -48,12 +56,16 @@ class CommonRemoteDataSource : RemoteDataSource {
         }.toModel()
     }
 
+    fun String.toSuccess(): Success {
+        return Success
+    }
+
     override suspend fun registerActivity(action: String, date: String): Either<Error, Success> = execute {
-        client.post<Success> {
+        client.post<String> {
             call("/hrm-api/activities/record")
             val json = io.ktor.client.features.json.defaultSerializer()
-            body =  json.write(Activity(action = action, date = date))
-        }
+            body =  json.write(listOf(Activity(action = action, date = date)))
+        }.toSuccess()
     }
 
     private suspend fun <R> execute(f: suspend () -> R): Either<Error, R> =
@@ -76,8 +88,9 @@ class CommonRemoteDataSource : RemoteDataSource {
 
     private fun HttpRequestBuilder.call(path: String) {
         url {
-            takeFrom(END_POINT)
-            encodedPath = "$path&appid=$API_KEY"
+            takeFrom(END_POINT_HELIOS)
+            //encodedPath = "$path&appid=$API_KEY"
+            encodedPath = "$path"
         }
     }
 }

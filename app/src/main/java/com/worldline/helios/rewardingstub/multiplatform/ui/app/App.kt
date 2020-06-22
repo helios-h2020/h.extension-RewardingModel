@@ -38,7 +38,7 @@ val domainModule = Kodein.Module("domainModule") {
 }
 
 val dataModule = Kodein.Module("dataModule") {
-    bind<RemoteDataSource>() with singleton { CommonRemoteDataSource() }
+    bind<RemoteDataSource>() with singleton { CommonRemoteDataSource(localDataSource = instance()) }
     bind<LocalDataSource>() with singleton {
         val context: Context = instance()
         CommonLocalDataSource(AndroidSettings(context.getSharedPreferences("bd", Context.MODE_PRIVATE)))

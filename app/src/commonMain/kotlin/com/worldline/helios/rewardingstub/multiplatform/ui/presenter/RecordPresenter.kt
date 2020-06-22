@@ -15,8 +15,17 @@ class RecordPresenter(
     override fun attach() {
 
     }
+
+    fun registerActivity(action: String, date: String) {
+        scope.launch {
+                execute { repository.registerActivity(action, date) }.fold(
+                error = { println("error") },
+                success = { view.showSuccess() }
+            )
+    }
 }
 
+}
 interface RecordView : View {
-
+    fun showSuccess()
 }

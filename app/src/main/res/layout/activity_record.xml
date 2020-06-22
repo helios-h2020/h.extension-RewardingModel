@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextTextPersonName3"
+            android:id="@+id/editAction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -29,7 +29,7 @@
             android:text="@string/edit_action" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName4"
+            android:id="@+id/editDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -37,7 +37,7 @@
             android:text="@string/edit_date" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_sendActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/button_send" />
