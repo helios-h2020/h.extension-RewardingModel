@@ -56,13 +56,16 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
         }.toModel()
     }
 
+    fun String.toSuccess(): Success {
+        return Success
+    }
+
     override suspend fun registerActivity(action: String, date: String): Either<Error, Success> = execute {
-        client.post<Success> {
+        client.post<String> {
             call("/hrm-api/activities/record")
             val json = io.ktor.client.features.json.defaultSerializer()
-            body =  json.write(arrayOf(Activity(action = action, date = date)))
-            //header("Authorization", "Bearer " + token )
-        }
+            body =  json.write(listOf(Activity(action = action, date = date)))
+        }.toSuccess()
     }
 
     private suspend fun <R> execute(f: suspend () -> R): Either<Error, R> =
