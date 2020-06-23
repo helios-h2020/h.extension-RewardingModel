@@ -6,9 +6,10 @@ import com.wordline.helios.rewarding.sdk.domain.model.Either
 import com.wordline.helios.rewarding.sdk.domain.model.Error
 import com.wordline.helios.rewarding.sdk.domain.model.Success
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
 import io.ktor.client.features.ClientRequestException
+import io.ktor.client.features.json.GsonSerializer
 import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
@@ -25,7 +26,7 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
         private const val TOKEN_HEADER = "Authorization"
     }
 
-    private val client = HttpClient {
+    private val client = HttpClient(Android) {
         // install(Auth) {
         //     basic {
         //         username = AUTH_USER
@@ -39,7 +40,7 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
         }
 
         install(JsonFeature) {
-            serializer = KotlinxSerializer()
+            serializer = GsonSerializer()
         }
 
         install(TokenFeature) {
