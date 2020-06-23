@@ -23,7 +23,7 @@ class CommonLocalDataSource(private val settings: Settings) : LocalDataSource {
 
     override suspend fun saveToken(registerDataResponse: RegisterDataResponse): Either<Error, Success> {
         return try {
-            settings.putString(ACCESS_TOKEN, Json.stringify(RegisterDataResponse.serializer(), registerDataResponse))
+            settings.putString(ACCESS_TOKEN, registerDataResponse.token)
             Either.Right(Success)
         } catch (e: Exception) {
             Either.Left(Error.TokenNotSaved)

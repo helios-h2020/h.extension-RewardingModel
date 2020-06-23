@@ -2,9 +2,12 @@ package com.worldline.helios.sampleapp.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import com.worldline.helios.sampleapp.ui.app.ACTIVITY_MODULE
+import com.worldline.helios.sampleapp.ui.extension.toast
 import com.worldline.helios.sampleapp.ui.presenter.AuthPresenter
 import com.worldline.helios.sampleapp.ui.presenter.AuthView
+import kotlinx.android.synthetic.main.activity_auth.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -35,12 +38,16 @@ class AuthActivity : RootActivity<AuthView>(), AuthView {
     }
 
     override fun registerListeners() {
-        // Do nothing
-
+        button_sendAuth.setOnClickListener() { v ->
+            presenter.registerUser(
+                userID = editUserID.text.toString(),
+                context = editContext.text.toString()
+            );
+        }
     }
 
     override fun showSuccess() {
-
+        toast("User registered.", Toast.LENGTH_LONG)
     }
 
 }

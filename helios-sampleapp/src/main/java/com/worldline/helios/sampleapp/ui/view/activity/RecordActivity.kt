@@ -2,10 +2,13 @@ package com.worldline.helios.sampleapp.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Toast
 import com.worldline.helios.sampleapp.R
 import com.worldline.helios.sampleapp.ui.app.ACTIVITY_MODULE
+import com.worldline.helios.sampleapp.ui.extension.toast
 import com.worldline.helios.sampleapp.ui.presenter.RecordPresenter
 import com.worldline.helios.sampleapp.ui.presenter.RecordView
+import kotlinx.android.synthetic.main.activity_record.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -36,8 +39,16 @@ class RecordActivity : RootActivity<RecordView>(), RecordView {
     }
 
     override fun registerListeners() {
-        // Do nothing
+        button_sendActivity.setOnClickListener { v ->
+            presenter.registerActivity(
+                action = editAction.text.toString(),
+                date = editDate.text.toString()
+            );
+        }
+    }
 
+    override fun showSuccess() {
+        toast("Activity registered.", Toast.LENGTH_SHORT)
     }
 
 }
