@@ -13,6 +13,8 @@
     <string name="button_send"> Send </string>
     <string name="edit_cardId"> CardID </string>
     <string name="button_redeemed"> Redeemed </string>
+    <string name="button_getCard"> Get your cards </string>
+    <string name="button_redeemCard"> Redeem Card </string>
     <string name="edit_action"> Action </string>
     <string name="edit_date"> Date </string>
 
