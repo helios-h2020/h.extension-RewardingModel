@@ -11,8 +11,8 @@ interface Repository {
         userID: String,
         heliosContext: String
     ): Either<Error, RegisterDataResponse>
-
-    suspend fun registerActivity(action: String, date: String): Either<Error, Success>
+    
+    suspend fun registerActivity(actions: List<String>, date: String): Either<Error, Success>
     suspend fun getCards(): Either<Error, List<Card>>
     suspend fun redeemCard(cardId: String): Either<Error, Success>
     suspend fun removeToken(): Either<Error, Success>
