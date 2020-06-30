@@ -13,7 +13,7 @@ interface Repository {
     ): Either<Error, RegisterDataResponse>
 
     suspend fun registerActivity(action: String, date: String): Either<Error, Success>
-    suspend fun getCards(): Either<Error, Card>
+    suspend fun getCards(): Either<Error, List<Card>>
     suspend fun redeemCard(cardId: String): Either<Error, Success>
     suspend fun removeToken(): Either<Error, Success>
     suspend fun getToken(): Either<Error, String>

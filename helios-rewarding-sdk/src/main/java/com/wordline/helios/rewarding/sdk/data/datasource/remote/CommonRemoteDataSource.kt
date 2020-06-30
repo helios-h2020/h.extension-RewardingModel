@@ -68,10 +68,13 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
             }.toSuccess()
         }
 
-    override suspend fun getCards(): Either<Error, Card> = execute {
-        client.get<CardDto> {
+    override suspend fun getCards(): Either<Error, List<Card>> = execute {
+        /*val listType = List<Card?>(size = 0, init= {i:Int -> null})
+        val spaceXFeed = gson.fromJson<List<Card>>(body, listType)*/
+
+        client.get<List<Card>> {
             call("/hrm-api/cards")
-        }.toModel()
+        }
     }
 
     override suspend fun redeemCard(cardId: String): Either<Error, Success> = execute {

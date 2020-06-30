@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/cardId"
         android:layout_width="97dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_marginRight="10dp"
         android:scaleType="centerCrop" />
 

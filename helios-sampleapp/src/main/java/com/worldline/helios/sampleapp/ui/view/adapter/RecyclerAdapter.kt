@@ -10,47 +10,42 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.wordline.helios.rewarding.sdk.domain.model.Card
 import com.worldline.helios.sampleapp.R
+import com.worldline.helios.sampleapp.ui.presenter.CardsPresenter
+import com.worldline.helios.sampleapp.ui.presenter.Presenter
+import kotlinx.android.synthetic.main.item_card_list.view.*
 
-class RecyclerAdapter() : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter(private var onRedeemClickListener: (Card) -> Unit) : RootAdapter<Card>() {
 
-    var cards: MutableList<Card>  = ArrayList()
-    lateinit var context: Context
-    lateinit var action: View.OnClickListener
+    override val itemLayoutId: Int = R.layout.item_card_list
 
-    fun RecyclerAdapter(cards : MutableList<Card>, context: Context/*, action: View.OnClickListener*/){
-        this.cards = cards
-        this.context = context
-        //this.action = action
-    }
+    override fun viewHolder(view: View): RootViewHolder<Card> =
+        ViewHolder(view)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = cards.get(position)
-        //holder.itemView.setOnClickListener({action.onClick(it)})
-        holder.bind(item, context)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RootViewHolder<Card> {
+        val view = LayoutInflater.from(parent.context).inflate(itemLayoutId, parent, false)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        return ViewHolder(layoutInflater.inflate(R.layout.item_card_list, parent, false))
-    }
-
-    override fun getItemCount(): Int {
-        return cards.size
-    }
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cardId = view.findViewById(R.id.cardId) as TextView
-        var tokens = view.findViewById(R.id.tokens) as TextView
-        val redeemButton = view.findViewById(R.id.redeemedButton) as Button
-
-        fun bind(card: Card, context: Context){
-            cardId.text = card.id
-            tokens.text = card.tokens
-            itemView.setOnClickListener(View.OnClickListener { Toast.makeText(context, card.id, Toast.LENGTH_SHORT).show() })
-            redeemButton.setOnClickListener(View.OnClickListener {
-                Toast.makeText(context, "Redeem", Toast.LENGTH_SHORT).show()
-            })
+        val viewHolder = viewHolder(view)
+        viewHolder.itemView.redeemedButton.setOnClickListener {
+            onRedeemClickListener(items[viewHolder.adapterPosition])
         }
+
+        return viewHolder
+    }
+
+    inner class ViewHolder(view: View) : RootAdapter.RootViewHolder<Card>(itemView = view) {
+
+        override fun bind(card: Card){
+            itemView.cardId.text = card.id
+            itemView.tokens.text = card.tokens
+
+
+            /*itemView.setOnClickListener(View.OnClickListener { Toast.makeText(context, card.id, Toast.LENGTH_SHORT).show() })
+            redeemButton.setOnClickListener(View.OnClickListener {
+                presenter.redeemCard(card.id)
+                Toast.makeText(context, "Redeemed", Toast.LENGTH_SHORT).show()
+            })*/
+        }
+
     }
 
 }

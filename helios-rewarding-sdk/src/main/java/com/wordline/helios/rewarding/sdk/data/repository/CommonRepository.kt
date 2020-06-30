@@ -27,7 +27,7 @@ class CommonRepository(
     override suspend fun registerActivity(action: String, date: String): Either<Error, Success> =
         remote.registerActivity(action, date)
 
-    override suspend fun getCards(): Either<Error, Card> =
+    override suspend fun getCards(): Either<Error, List<Card>> =
         remote.getCards()
     /*.flatMap { remoteCard ->
 
