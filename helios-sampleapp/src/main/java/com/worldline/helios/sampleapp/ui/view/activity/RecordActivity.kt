@@ -2,7 +2,10 @@ package com.worldline.helios.sampleapp.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import android.widget.CheckBox
 import android.widget.Toast
+import com.wordline.helios.rewarding.sdk.domain.Action
 import com.worldline.helios.sampleapp.R
 import com.worldline.helios.sampleapp.ui.app.ACTIVITY_MODULE
 import com.worldline.helios.sampleapp.ui.extension.toast
@@ -13,6 +16,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
+import java.util.*
 
 
 class RecordActivity : RootActivity<RecordView>(), RecordView {
@@ -34,15 +38,29 @@ class RecordActivity : RootActivity<RecordView>(), RecordView {
         }
     }
 
+    private val checkedActions: MutableList<String> = mutableListOf<String>()
+
     override fun initializeUI() {
         // Do nothing
+        for (action in Action.values()) {
+            val checkBox = CheckBox(this)
+            checkBox.text = action.value
+            checkBox.setOnClickListener {
+                if (checkBox.isChecked) {
+                    checkedActions.add(checkBox.text.toString())
+                } else {
+                    checkedActions.remove(checkBox.text.toString())
+                }
+            }
+            recordLinearLayout.addView(checkBox)
+        }
     }
 
     override fun registerListeners() {
-        button_sendActivity.setOnClickListener { v ->
+        button_sendActivity.setOnClickListener {
             presenter.registerActivity(
-                action = editAction.text.toString(),
-                date = editDate.text.toString()
+                actions = checkedActions,
+                date = Date().toString()
             );
         }
     }

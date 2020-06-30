@@ -54,12 +54,16 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
         }.toModel()
     }
 
-    override suspend fun registerActivity(action: String, date: String): Either<Error, Success> =
+    override suspend fun registerActivity(actions: List<String>, date: String): Either<Error, Success> =
         execute {
             client.post<String> {
                 call("/hrm-api/activities/record")
                 val json = io.ktor.client.features.json.defaultSerializer()
-                body = json.write(listOf(Activity(action = action, date = date)))
+                val activities: MutableList<Activity> = mutableListOf<Activity>()
+                for (action in actions) {
+                    activities.add(Activity(action = action, date = date))
+                }
+                body = json.write(activities)
             }.toSuccess()
         }
 
