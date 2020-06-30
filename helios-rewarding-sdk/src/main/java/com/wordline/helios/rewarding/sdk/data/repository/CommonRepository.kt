@@ -13,6 +13,7 @@ class CommonRepository(
     private val local: LocalDataSource
 ) : Repository {
 
+    //It registers an user (userID + context) and saves the token that returns the response.
     override suspend fun registerUser(
         userID: String,
         heliosContext: String
@@ -24,15 +25,14 @@ class CommonRepository(
 
             }
 
+    //It registers an activity (action + date + token).
     override suspend fun registerActivity(action: String, date: String): Either<Error, Success> =
         remote.registerActivity(action, date)
 
     override suspend fun getCards(): Either<Error, List<Card>> =
         remote.getCards()
-    /*.flatMap { remoteCard ->
 
-    }*/
-
+    //It redeems a card owned by the token.
     override suspend fun redeemCard(cardId: String): Either<Error, Success> =
         remote.redeemCard(cardId)
 

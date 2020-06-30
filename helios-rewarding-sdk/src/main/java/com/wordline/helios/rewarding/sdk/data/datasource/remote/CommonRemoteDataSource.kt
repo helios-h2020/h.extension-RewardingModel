@@ -26,12 +26,6 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
     }
 
     private val client = HttpClient(Android) {
-        // install(Auth) {
-        //     basic {
-        //         username = AUTH_USER
-        //         password = AUTH_PASS
-        //     }
-        // }
 
         install(Logging) {
             logger = Logger.SIMPLE
@@ -42,6 +36,7 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
             serializer = GsonSerializer()
         }
 
+        //Install the token in the API's calls
         install(TokenFeature) {
             tokenHeaderName = TOKEN_HEADER
             tokenProvider = localDataSource
@@ -69,9 +64,6 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
         }
 
     override suspend fun getCards(): Either<Error, List<Card>> = execute {
-        /*val listType = List<Card?>(size = 0, init= {i:Int -> null})
-        val spaceXFeed = gson.fromJson<List<Card>>(body, listType)*/
-
         client.get<List<Card>> {
             call("/hrm-api/cards")
         }

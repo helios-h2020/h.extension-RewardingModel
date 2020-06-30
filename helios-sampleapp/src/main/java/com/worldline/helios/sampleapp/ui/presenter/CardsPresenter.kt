@@ -17,6 +17,7 @@ class CardsPresenter(
         getCards()
     }
 
+    //If the getCards works It'll show the list of cards in the view.
     fun getCards() {
         scope.launch {
             execute { repository.getCards() }.fold(
@@ -26,6 +27,7 @@ class CardsPresenter(
         }
     }
 
+    //If the redeemCard works It'll update the list of cards calling again the getCards.
     fun redeemCard(cardId: String) {
         scope.launch {
             execute {

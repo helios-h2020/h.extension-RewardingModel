@@ -44,7 +44,6 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
     }
 
     override fun registerListeners() {
-        // Do nothing
         buttonRegister.setOnClickListener() { v ->
             val intent = Intent(this, AuthActivity::class.java);
             startActivity(intent);

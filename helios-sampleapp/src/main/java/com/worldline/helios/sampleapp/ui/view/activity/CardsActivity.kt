@@ -23,7 +23,6 @@ class CardsActivity : RootActivity<CardsView>(), CardsView {
 
     lateinit var mRecyclerView: RecyclerView
     lateinit var mAdapter: RecyclerAdapter
-    //lateinit var action: View.OnClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +34,9 @@ class CardsActivity : RootActivity<CardsView>(), CardsView {
         mRecyclerView = findViewById(R.id.CardsList) as RecyclerView
         mRecyclerView.setHasFixedSize(true)
         mRecyclerView.layoutManager = LinearLayoutManager(this)
+        //Creates the RecyclerAdapter with a callback for an OnClick event.
         mAdapter = RecyclerAdapter {
             presenter.redeemCard(it.id)
-
         }
         mRecyclerView.adapter = mAdapter
     }
@@ -76,6 +75,7 @@ class CardsActivity : RootActivity<CardsView>(), CardsView {
         toast("Cards loaded.", Toast.LENGTH_LONG)
     }
 
+    //Updates the list of cards.
     override fun showList(cards: List<Card>) {
         mAdapter.replace(cards)
     }

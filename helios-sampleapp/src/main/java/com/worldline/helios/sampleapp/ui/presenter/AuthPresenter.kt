@@ -16,6 +16,7 @@ class AuthPresenter(
 
     }
 
+    //If the registerUser call works It'll show a toast with a message.
     fun registerUser(userID: String, context: String) {
         scope.launch {
             execute { repository.registerUser(userID, context) }.fold(

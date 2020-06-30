@@ -16,6 +16,7 @@ class RecordPresenter(
 
     }
 
+    //If the registerActivity call works It'll show a toast with a message.
     fun registerActivity(action: String, date: String) {
         scope.launch {
             execute { repository.registerActivity(action, date) }.fold(
