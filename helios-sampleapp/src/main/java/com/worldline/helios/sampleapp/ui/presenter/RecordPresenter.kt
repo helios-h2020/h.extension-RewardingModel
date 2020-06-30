@@ -16,9 +16,9 @@ class RecordPresenter(
 
     }
 
-    fun registerActivity(action: String, date: String) {
+    fun registerActivity(actions: List<String>, date: String) {
         scope.launch {
-            execute { repository.registerActivity(action, date) }.fold(
+            execute { repository.registerActivity(actions, date) }.fold(
                 error = { println("error") },
                 success = { view.showSuccess() }
             )

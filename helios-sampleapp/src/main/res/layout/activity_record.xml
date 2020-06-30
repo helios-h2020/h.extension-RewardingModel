@@ -19,27 +19,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/editAction"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/edit_action" />
+<!--        <EditText-->
+<!--            android:id="@+id/editAction"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:text="@string/edit_action" />-->
 
-        <EditText
-            android:id="@+id/editDate"
+<!--        <EditText-->
+<!--            android:id="@+id/editDate"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:ems="10"-->
+<!--            android:inputType="textPersonName"-->
+<!--            android:text="@string/edit_date" />-->
+        <LinearLayout
+            android:id="@+id/recordLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/edit_date" />
+            android:orientation="vertical">
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_sendActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_send" />
+            android:text="@string/button_send"
+            />
 
     </LinearLayout>
 
