@@ -1,6 +1,7 @@
 package com.worldline.helios.sampleapp.ui.presenter
 
 import com.wordline.helios.rewarding.sdk.data.repository.Repository
+import com.wordline.helios.rewarding.sdk.domain.model.Activity
 import com.worldline.helios.sampleapp.ui.error.ErrorHandler
 import com.worldline.helios.sampleapp.ui.executor.Executor
 import kotlinx.coroutines.launch
@@ -19,7 +20,11 @@ class RecordPresenter(
     //If the registerActivity call works It'll show a toast with a message.
     fun registerActivity(actions: List<String>, date: String) {
         scope.launch {
-            execute { repository.registerActivity(actions, date) }.fold(
+            val activities: MutableList<Activity> = mutableListOf<Activity>()
+            for (action in actions) {
+                activities.add(Activity(action = action, date = date))
+            }
+            execute { repository.registerActivity(activities) }.fold(
                 error = { println("error") },
                 success = { view.showSuccess() }
             )

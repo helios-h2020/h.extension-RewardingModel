@@ -54,15 +54,11 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
         }.toModel()
     }
 
-    override suspend fun registerActivity(actions: List<String>, date: String): Either<Error, Success> =
+    override suspend fun registerActivity(activities: List<Activity>): Either<Error, Success> =
         execute {
             client.post<String> {
                 call("/hrm-api/activities/record")
                 val json = io.ktor.client.features.json.defaultSerializer()
-                val activities: MutableList<Activity> = mutableListOf<Activity>()
-                for (action in actions) {
-                    activities.add(Activity(action = action, date = date))
-                }
                 body = json.write(activities)
             }.toSuccess()
         }
@@ -75,7 +71,7 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
 
     override suspend fun redeemCard(cardId: String): Either<Error, Success> = execute {
         client.delete<String> {
-            call("/hrm-api/cards/redeemedCard?cardID=" + cardId)
+            call("/hrm-api/cards/redeemedCard?cardID=$cardId")
         }.toSuccess()
     }
 
@@ -100,7 +96,7 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
     private fun HttpRequestBuilder.call(path: String) {
         url {
             takeFrom(END_POINT_HELIOS)
-            encodedPath = "$path"
+            encodedPath = path
         }
     }
 

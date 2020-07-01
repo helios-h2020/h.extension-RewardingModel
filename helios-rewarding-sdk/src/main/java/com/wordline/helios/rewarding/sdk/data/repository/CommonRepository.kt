@@ -3,10 +3,7 @@ package com.wordline.helios.rewarding.sdk.data.repository
 import com.wordline.helios.rewarding.sdk.data.datasource.local.LocalDataSource
 import com.wordline.helios.rewarding.sdk.data.datasource.remote.RegisterDataResponse
 import com.wordline.helios.rewarding.sdk.data.datasource.remote.RemoteDataSource
-import com.wordline.helios.rewarding.sdk.domain.model.Card
-import com.wordline.helios.rewarding.sdk.domain.model.Either
-import com.wordline.helios.rewarding.sdk.domain.model.Error
-import com.wordline.helios.rewarding.sdk.domain.model.Success
+import com.wordline.helios.rewarding.sdk.domain.model.*
 
 class CommonRepository(
     private val remote: RemoteDataSource,
@@ -26,8 +23,8 @@ class CommonRepository(
             }
 
     //It registers a list of activities (actions + date + token).
-    override suspend fun registerActivity(actions: List<String>, date: String): Either<Error, Success> =
-        remote.registerActivity(actions, date)
+    override suspend fun registerActivity(activities: List<Activity>): Either<Error, Success> =
+        remote.registerActivity(activities)
 
     override suspend fun getCards(): Either<Error, List<Card>> =
         remote.getCards()
