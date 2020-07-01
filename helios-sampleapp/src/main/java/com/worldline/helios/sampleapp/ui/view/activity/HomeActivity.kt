@@ -1,6 +1,5 @@
 package com.worldline.helios.sampleapp.ui.view.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -22,10 +21,6 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
         presenter.removeToken()
     }
 
-    companion object {
-        fun intent(context: Context): Intent = Intent(context, HomeActivity::class.java)
-    }
-
     override val presenter by instance<HomePresenter>()
     override val layoutResourceId: Int = R.layout.activity_home
     override val activityModule = Kodein.Module(ACTIVITY_MODULE) {
@@ -44,22 +39,22 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
     }
 
     override fun registerListeners() {
-        buttonRegister.setOnClickListener() { v ->
-            val intent = Intent(this, AuthActivity::class.java);
-            startActivity(intent);
+        buttonRegister.setOnClickListener {
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
         }
 
-        buttonRecord.setOnClickListener() { v ->
-            val intent = Intent(this, RecordActivity::class.java);
-            startActivity(intent);
+        buttonRecord.setOnClickListener {
+            val intent = Intent(this, RecordActivity::class.java)
+            startActivity(intent)
         }
 
-        buttonCards.setOnClickListener() { v ->
-            val intent = Intent(this, CardsActivity::class.java);
-            startActivity(intent);
+        buttonCards.setOnClickListener {
+            val intent = Intent(this, CardsActivity::class.java)
+            startActivity(intent)
         }
 
-        buttonToken.setOnClickListener() { v ->
+        buttonToken.setOnClickListener {
             presenter.getToken()
         }
     }

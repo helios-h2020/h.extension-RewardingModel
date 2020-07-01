@@ -7,7 +7,7 @@ import com.wordline.helios.rewarding.sdk.domain.model.Card
 import com.worldline.helios.sampleapp.R
 import kotlinx.android.synthetic.main.item_card_list.view.*
 
-class RecyclerAdapter(private var onRedeemClickListener: (Card) -> Unit) : RootAdapter<Card>() {
+class CardsAdapter(private var onRedeemClickListener: (Card) -> Unit) : RootAdapter<Card>() {
 
     override val itemLayoutId: Int = R.layout.item_card_list
 
@@ -29,9 +29,9 @@ class RecyclerAdapter(private var onRedeemClickListener: (Card) -> Unit) : RootA
     inner class ViewHolder(view: View) : RootAdapter.RootViewHolder<Card>(itemView = view) {
 
         //Relates the content with the item.
-        override fun bind(card: Card){
-            itemView.cardId.text = card.id
-            itemView.tokens.text = card.tokens
+        override fun bind(model: Card){
+            itemView.cardId.text = model.id
+            itemView.tokens.text = model.tokens + " HLO"
 
         }
 

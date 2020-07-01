@@ -5,14 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.wordline.helios.rewarding.sdk.domain.model.Card
 import com.worldline.helios.sampleapp.R
 import com.worldline.helios.sampleapp.ui.app.ACTIVITY_MODULE
 import com.worldline.helios.sampleapp.ui.extension.toast
 import com.worldline.helios.sampleapp.ui.presenter.CardsPresenter
 import com.worldline.helios.sampleapp.ui.presenter.CardsView
-import com.worldline.helios.sampleapp.ui.view.adapter.RecyclerAdapter
+import com.worldline.helios.sampleapp.ui.view.adapter.CardsAdapter
+import kotlinx.android.synthetic.main.activity_cards.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -21,8 +21,7 @@ import org.kodein.di.generic.provider
 
 class CardsActivity : RootActivity<CardsView>(), CardsView {
 
-    lateinit var mRecyclerView: RecyclerView
-    lateinit var mAdapter: RecyclerAdapter
+    private lateinit var mAdapter: CardsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +29,14 @@ class CardsActivity : RootActivity<CardsView>(), CardsView {
         setUpRecyclerView()
     }
 
-    fun setUpRecyclerView() {
-        mRecyclerView = findViewById(R.id.CardsList) as RecyclerView
-        mRecyclerView.setHasFixedSize(true)
-        mRecyclerView.layoutManager = LinearLayoutManager(this)
-        //Creates the RecyclerAdapter with a callback for an OnClick event.
-        mAdapter = RecyclerAdapter {
+    private fun setUpRecyclerView() {
+        CardsList.setHasFixedSize(true)
+        CardsList.layoutManager = LinearLayoutManager(this)
+        //Creates the CardsAdapter with a callback for an OnClick event.
+        mAdapter = CardsAdapter {
             presenter.redeemCard(it.id)
         }
-        mRecyclerView.adapter = mAdapter
-    }
-
-    companion object {
-        fun intent(context: Context): Intent = Intent(context, CardsActivity::class.java)
+        CardsList.adapter = mAdapter
     }
 
     override val presenter by instance<CardsPresenter>()
@@ -64,7 +58,6 @@ class CardsActivity : RootActivity<CardsView>(), CardsView {
 
     override fun registerListeners() {
         // Do nothing
-
     }
 
     override fun showError(error: String) {

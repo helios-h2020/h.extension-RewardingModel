@@ -5,7 +5,6 @@ import com.wordline.helios.rewarding.sdk.data.datasource.remote.RegisterDataResp
 import com.wordline.helios.rewarding.sdk.domain.model.Either
 import com.wordline.helios.rewarding.sdk.domain.model.Error
 import com.wordline.helios.rewarding.sdk.domain.model.Success
-import kotlinx.serialization.json.Json
 
 class CommonLocalDataSource(private val settings: Settings) : LocalDataSource {
 

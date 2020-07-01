@@ -13,12 +13,12 @@ sealed class Either<L, R> {
         override fun toString(): String = "Right $success"
     }
 
-    suspend infix fun <Rp> map(f: suspend (R) -> Rp): Either<L, Rp> {
-        return when (this) {
-            is Left -> Left(this.error)
-            is Right -> Right(f(this.success))
-        }
-    }
+//    suspend infix fun <Rp> map(f: suspend (R) -> Rp): Either<L, Rp> {
+//        return when (this) {
+//            is Left -> Left(this.error)
+//            is Right -> Right(f(this.success))
+//        }
+//    }
 
     suspend infix fun <Rp> flatMap(f: suspend (Right<L, R>) -> Either<L, Rp>): Either<L, Rp> {
         return when (this) {
