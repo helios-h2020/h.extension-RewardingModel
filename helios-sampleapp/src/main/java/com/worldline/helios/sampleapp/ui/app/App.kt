@@ -3,8 +3,8 @@ package com.worldline.helios.sampleapp.ui.app
 import android.app.Application
 import android.content.Context
 import com.russhwolf.settings.AndroidSettings
-import com.wordline.helios.rewarding.sdk.HeliosSdkImpl
-import com.wordline.helios.rewarding.sdk.HeliosSdk
+import com.wordline.helios.rewarding.sdk.RewardingSdk
+import com.wordline.helios.rewarding.sdk.RewardingSdkImpl
 import com.wordline.helios.rewarding.sdk.data.datasource.local.CommonLocalDataSource
 import com.wordline.helios.rewarding.sdk.data.datasource.local.LocalDataSource
 import com.wordline.helios.rewarding.sdk.data.datasource.remote.CommonRemoteDataSource
@@ -29,7 +29,7 @@ class App : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        HeliosSdkImpl.init(this)
+        RewardingSdkImpl.init(this)
     }
 }
 
@@ -44,7 +44,7 @@ val domainModule = Kodein.Module("domainModule") {
 }
 
 val dataModule = Kodein.Module("dataModule") {
-    bind<HeliosSdk>() with singleton { HeliosSdkImpl() }
+    bind<RewardingSdk>() with singleton { RewardingSdkImpl() }
     bind<RemoteDataSource>() with singleton { CommonRemoteDataSource(localDataSource = instance()) }
     bind<LocalDataSource>() with singleton {
         val context: Context = instance()

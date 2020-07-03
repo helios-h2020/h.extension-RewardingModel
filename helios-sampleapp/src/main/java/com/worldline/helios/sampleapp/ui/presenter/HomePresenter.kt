@@ -1,12 +1,13 @@
 package com.worldline.helios.sampleapp.ui.presenter
 
-import com.wordline.helios.rewarding.sdk.data.repository.Repository
+import com.wordline.helios.rewarding.sdk.GetTokenCallback
+import com.wordline.helios.rewarding.sdk.RemoveTokenCallback
+import com.wordline.helios.rewarding.sdk.RewardingSdk
 import com.worldline.helios.sampleapp.ui.error.ErrorHandler
 import com.worldline.helios.sampleapp.ui.executor.Executor
-import kotlinx.coroutines.launch
 
 class HomePresenter(
-    private val repository: Repository,
+    private val rewardingSdk: RewardingSdk,
     errorHandler: ErrorHandler,
     executor: Executor,
     view: HomeView
@@ -16,23 +17,28 @@ class HomePresenter(
 
     }
 
+    override fun detach() {
+        rewardingSdk.cancel()
+    }
+
     fun getToken() {
-        scope.launch {
-            execute { repository.getToken() }.fold(
-                error = { onRetry(it) { getToken() } },
-                success = { view.showToken(it) }
-            )
-        }
+        rewardingSdk.getToken(object : GetTokenCallback {
+            override fun onError() {
+                view.showError("error")
+            }
+
+            override fun onSuccess(token: String) {
+                view.showToken(token)
+            }
+        })
     }
 
     fun removeToken() {
-        scope.launch {
-            execute { repository.removeToken() }.fold(
-                error = { onRetry(it) { removeToken() } },
-                success = { }
-            )
-
-        }
+        rewardingSdk.removeToken(object : RemoveTokenCallback {
+            override fun onError() {
+                view.showError("error")
+            }
+        })
     }
 
 }

@@ -1,12 +1,12 @@
 package com.worldline.helios.sampleapp.ui.presenter
 
-import com.wordline.helios.rewarding.sdk.data.repository.Repository
+import com.wordline.helios.rewarding.sdk.RegisterUserCallback
+import com.wordline.helios.rewarding.sdk.RewardingSdk
 import com.worldline.helios.sampleapp.ui.error.ErrorHandler
 import com.worldline.helios.sampleapp.ui.executor.Executor
-import kotlinx.coroutines.launch
 
 class AuthPresenter(
-    private val repository: Repository,
+    private val rewardingSdk: RewardingSdk,
     errorHandler: ErrorHandler,
     executor: Executor,
     view: AuthView
@@ -16,14 +16,21 @@ class AuthPresenter(
 
     }
 
+    override fun detach() {
+        rewardingSdk.cancel()
+    }
+
     //If the registerUser call works It'll show a toast with a message.
     fun registerUser(userID: String, context: String) {
-        scope.launch {
-            execute { repository.registerUser(userID, context) }.fold(
-                error = { println("error") },
-                success = { view.showSuccess() }
-            )
-        }
+        rewardingSdk.registerUser(userID, context, object : RegisterUserCallback {
+            override fun onError() {
+                view.showError("error")
+            }
+
+            override fun onSuccess() {
+                view.showSuccess()
+            }
+        })
     }
 }
 

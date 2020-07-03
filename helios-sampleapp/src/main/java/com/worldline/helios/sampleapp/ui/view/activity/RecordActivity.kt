@@ -2,7 +2,6 @@ package com.worldline.helios.sampleapp.ui.view.activity
 
 import android.content.Context
 import android.content.Intent
-import android.view.View
 import android.widget.CheckBox
 import android.widget.Toast
 import com.wordline.helios.rewarding.sdk.domain.Action
@@ -30,7 +29,7 @@ class RecordActivity : RootActivity<RecordView>(), RecordView {
     override val activityModule = Kodein.Module(ACTIVITY_MODULE) {
         bind<RecordPresenter>() with provider {
             RecordPresenter(
-                repository = instance(),
+                rewardingSdk = instance(),
                 executor = instance(),
                 errorHandler = instance(),
                 view = this@RecordActivity
@@ -38,7 +37,7 @@ class RecordActivity : RootActivity<RecordView>(), RecordView {
         }
     }
 
-    private val checkedActions: MutableList<String> = mutableListOf<String>()
+    private val checkedActions: MutableList<Action> = mutableListOf()
 
     override fun initializeUI() {
         // Do nothing
@@ -47,9 +46,9 @@ class RecordActivity : RootActivity<RecordView>(), RecordView {
             checkBox.text = action.value
             checkBox.setOnClickListener {
                 if (checkBox.isChecked) {
-                    checkedActions.add(checkBox.text.toString())
+                    checkedActions.add(action)
                 } else {
-                    checkedActions.remove(checkBox.text.toString())
+                    checkedActions.remove(action)
                 }
             }
             recordLinearLayout.addView(checkBox)

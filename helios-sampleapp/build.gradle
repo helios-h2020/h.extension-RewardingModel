@@ -2,6 +2,9 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 apply plugin: 'com.android.application'
@@ -38,9 +41,11 @@ android {
 }
 
 dependencies {
-    //implementation(name: 'helios-rewarding-sdk-debug', ext: 'aar')
+//    implementation(name: 'helios-rewarding-sdk-debug', ext: 'aar') {
+//        transitive = true
+//    }
     implementation project(":helios-rewarding-sdk")
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
 

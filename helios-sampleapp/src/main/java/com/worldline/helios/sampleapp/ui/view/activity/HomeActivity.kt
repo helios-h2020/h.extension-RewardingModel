@@ -26,7 +26,7 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
     override val activityModule = Kodein.Module(ACTIVITY_MODULE) {
         bind<HomePresenter>() with provider {
             HomePresenter(
-                repository = instance(),
+                rewardingSdk = instance(),
                 executor = instance(),
                 errorHandler = instance(),
                 view = this@HomeActivity
