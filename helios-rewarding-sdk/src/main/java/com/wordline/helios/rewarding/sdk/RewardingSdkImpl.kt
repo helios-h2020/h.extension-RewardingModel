@@ -83,7 +83,7 @@ class RewardingSdkImpl : RewardingSdk {
     }
 
     override fun cancel() {
-        job.cancel()
+        scope.coroutineContext.cancelChildren()
     }
 
     override fun registerUser(
