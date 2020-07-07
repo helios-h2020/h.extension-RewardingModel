@@ -32,7 +32,7 @@ class AuthActivity : RootActivity<AuthView>(), AuthView {
     }
 
     override fun registerListeners() {
-        button_sendAuth.setOnClickListener() { v ->
+        button_sendAuth.setOnClickListener() {
             presenter.registerUser(
                 userID = editUserID.text.toString(),
                 context = editContext.text.toString()
