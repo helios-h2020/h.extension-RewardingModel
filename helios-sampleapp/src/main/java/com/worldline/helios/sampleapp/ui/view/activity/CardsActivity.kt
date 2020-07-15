@@ -1,7 +1,5 @@
 package com.worldline.helios.sampleapp.ui.view.activity
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -44,7 +42,7 @@ class CardsActivity : RootActivity<CardsView>(), CardsView {
     override val activityModule = Kodein.Module(ACTIVITY_MODULE) {
         bind<CardsPresenter>() with provider {
             CardsPresenter(
-                repository = instance(),
+                rewardingSdk = instance(),
                 executor = instance(),
                 errorHandler = instance(),
                 view = this@CardsActivity

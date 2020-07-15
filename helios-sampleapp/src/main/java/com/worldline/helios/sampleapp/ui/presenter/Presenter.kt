@@ -28,7 +28,7 @@ abstract class Presenter<out V : View>(
 
     abstract fun attach()
 
-    fun detach() = job.cancel()
+    abstract fun detach()
 
     protected suspend fun <T> execute(f: suspend () -> Either<Error, T>): Either<Error, T> =
         withContext(executor.bg) { f() }

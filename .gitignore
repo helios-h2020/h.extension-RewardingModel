@@ -11,3 +11,4 @@
 /iosApp/iosApp.xcworkspace/xcuserdata
 /iosApp/Podfile.lock
 app/build
+helios-sampleapp/libs

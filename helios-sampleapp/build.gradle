@@ -2,11 +2,15 @@ repositories {
     google()
     jcenter()
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: 'helios_rewarding_sdk.gradle'
 
 android {
     compileSdkVersion 29
@@ -17,7 +21,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,9 +42,10 @@ android {
 }
 
 dependencies {
-    //implementation(name: 'helios-rewarding-sdk-debug', ext: 'aar')
-    implementation project(":helios-rewarding-sdk")
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation(name: 'helios-rewarding-sdk-debug', ext: 'aar')
+//    implementation(name: 'helios-rewarding-sdk-release', ext: 'aar')
+//    implementation project(":helios-rewarding-sdk")
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
 
@@ -57,9 +62,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
-
-    implementation "com.russhwolf:multiplatform-settings:$multiplatform_settings_version"
-
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {

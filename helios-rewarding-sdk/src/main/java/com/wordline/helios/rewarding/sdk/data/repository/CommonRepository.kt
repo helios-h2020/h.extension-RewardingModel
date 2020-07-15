@@ -23,8 +23,8 @@ class CommonRepository(
             }
 
     //It registers a list of activities (actions + date + token).
-    override suspend fun registerActivity(activities: List<Activity>): Either<Error, Success> =
-        remote.registerActivity(activities)
+    override suspend fun recordRewardableActivity(rewardableActivities: List<RewardableActivity>): Either<Error, Success> =
+        remote.recordRewardableActivity(rewardableActivities)
 
     override suspend fun getCards(): Either<Error, List<Card>> =
         remote.getCards()
