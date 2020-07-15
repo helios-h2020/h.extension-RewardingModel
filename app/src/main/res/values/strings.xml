@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Kotlin multiplatform seed</string>
-
-    <string name="invalid_credentials">Invalid credentials</string>
-    <string name="nointernet_error">Please review your connection</string>
-    <string name="default_error">There was an application error</string>
-
-</resources>

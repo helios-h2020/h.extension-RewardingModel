@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Kotlin multiplatform seed</string>
+
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="nointernet_error">Please review your connection</string>
+    <string name="default_error">There was an application error</string>
+    <string name="button_register">Register</string>
+    <string name="button_token">Show Token</string>
+    <string name="button_record">Record activity</string>
+    <string name="button_cards">Cards</string>
+    <string name="edit_userId"> UserID </string>
+    <string name="edit_context"> Context </string>
+    <string name="button_send"> Send </string>
+    <string name="edit_cardId"> CardID </string>
+    <string name="button_redeemed"> Redeemed </string>
+    <string name="button_getCard"> Get your cards </string>
+    <string name="button_redeemCard"> Redeem Card </string>
+    <string name="edit_action"> Action </string>
+    <string name="edit_date"> Date </string>
+
+</resources>
