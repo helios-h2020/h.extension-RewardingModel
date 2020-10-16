@@ -29,7 +29,7 @@ class App : Application(), KodeinAware {
 
     override fun onCreate() {
         super.onCreate()
-        RewardingSdkImpl.init(this)
+        RewardingSdkImpl.init(this, "https://devel3.tempos21.com")
     }
 }
 
@@ -45,7 +45,7 @@ val domainModule = Kodein.Module("domainModule") {
 
 val dataModule = Kodein.Module("dataModule") {
     bind<RewardingSdk>() with singleton { RewardingSdkImpl() }
-    bind<RemoteDataSource>() with singleton { CommonRemoteDataSource(localDataSource = instance()) }
+    bind<RemoteDataSource>() with singleton { CommonRemoteDataSource(localDataSource = instance(), endPoint = instance()) }
     bind<LocalDataSource>() with singleton {
         val context: Context = instance()
         CommonLocalDataSource(

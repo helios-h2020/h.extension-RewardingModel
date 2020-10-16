@@ -63,7 +63,7 @@ class RewardingSdkImpl : RewardingSdk {
 
         private lateinit var scope: CoroutineScope
 
-        fun init(context: Context) {
+        fun init(context: Context, apiUrl: String) {
             executor = Executor()
             job = SupervisorJob()
             scope = CoroutineScope(job + executor.main)
@@ -76,7 +76,7 @@ class RewardingSdkImpl : RewardingSdk {
                 )
             )
             commonRepository = CommonRepository(
-                CommonRemoteDataSource(localDataSource = commonLocalDataSource),
+                CommonRemoteDataSource(localDataSource = commonLocalDataSource, endPoint = apiUrl),
                 commonLocalDataSource
             )
         }

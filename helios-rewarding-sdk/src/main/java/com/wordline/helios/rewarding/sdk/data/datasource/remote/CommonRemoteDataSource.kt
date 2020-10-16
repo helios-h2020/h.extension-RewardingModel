@@ -18,10 +18,10 @@ import io.ktor.client.request.post
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.takeFrom
 
-class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSource {
+class CommonRemoteDataSource(localDataSource: LocalDataSource, override val endPoint: String) : RemoteDataSource {
 
     companion object {
-        const val END_POINT_HELIOS = "https://devel3.tempos21.com"
+//        const val END_POINT_HELIOS = endPoint
         private const val TOKEN_HEADER = "Authorization"
     }
 
@@ -95,7 +95,7 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource) : RemoteDataSourc
 
     private fun HttpRequestBuilder.call(path: String) {
         url {
-            takeFrom(END_POINT_HELIOS)
+            takeFrom(endPoint)
             encodedPath = path
         }
     }
