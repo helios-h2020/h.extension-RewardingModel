@@ -1,7 +1,10 @@
 package com.wordline.helios.rewarding.sdk.data.datasource.remote
 
 import com.wordline.helios.rewarding.sdk.data.datasource.local.LocalDataSource
-import com.wordline.helios.rewarding.sdk.domain.model.*
+import com.wordline.helios.rewarding.sdk.domain.model.Either
+import com.wordline.helios.rewarding.sdk.domain.model.Error
+import com.wordline.helios.rewarding.sdk.domain.model.RewardableActivity
+import com.wordline.helios.rewarding.sdk.domain.model.Success
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.features.ClientRequestException
@@ -12,8 +15,6 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.delete
-import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.takeFrom
@@ -21,7 +22,6 @@ import io.ktor.http.takeFrom
 class CommonRemoteDataSource(localDataSource: LocalDataSource, override val endPoint: String) : RemoteDataSource {
 
     companion object {
-//        const val END_POINT_HELIOS = endPoint
         private const val TOKEN_HEADER = "Authorization"
     }
 
@@ -62,18 +62,6 @@ class CommonRemoteDataSource(localDataSource: LocalDataSource, override val endP
                 body = json.write(rewardableActivities)
             }.toSuccess()
         }
-
-    override suspend fun getCards(): Either<Error, List<Card>> = execute {
-        client.get<List<Card>> {
-            call("/hrm-api/cards")
-        }
-    }
-
-    override suspend fun redeemCard(cardId: String): Either<Error, Success> = execute {
-        client.delete<String> {
-            call("/hrm-api/cards/redeemedCard?cardID=$cardId")
-        }.toSuccess()
-    }
 
     private suspend fun <R> execute(f: suspend () -> R): Either<Error, R> =
         try {

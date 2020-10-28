@@ -37,13 +37,6 @@
             android:text="@string/button_record"
             android:layout_marginVertical="@dimen/button_vertical_margin"/>
 
-        <Button
-            android:id="@+id/buttonCards"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_cards"
-            android:layout_marginVertical="@dimen/button_vertical_margin"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
