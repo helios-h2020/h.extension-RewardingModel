@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.view.activity.CardsActivity" />
         <activity android:name=".ui.view.activity.RecordActivity" />
         <activity android:name=".ui.view.activity.AuthActivity" />
 

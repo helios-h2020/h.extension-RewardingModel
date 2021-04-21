@@ -49,11 +49,6 @@ class HomeActivity : RootActivity<HomeView>(), HomeView {
             startActivity(intent)
         }
 
-        buttonCards.setOnClickListener {
-            val intent = Intent(this, CardsActivity::class.java)
-            startActivity(intent)
-        }
-
         buttonToken.setOnClickListener {
             presenter.getToken()
         }

@@ -5,7 +5,6 @@ import com.russhwolf.settings.AndroidSettings
 import com.wordline.helios.rewarding.sdk.data.datasource.local.CommonLocalDataSource
 import com.wordline.helios.rewarding.sdk.data.datasource.remote.CommonRemoteDataSource
 import com.wordline.helios.rewarding.sdk.data.repository.CommonRepository
-import com.wordline.helios.rewarding.sdk.domain.model.Card
 import com.wordline.helios.rewarding.sdk.domain.model.Either
 import com.wordline.helios.rewarding.sdk.domain.model.Error
 import com.wordline.helios.rewarding.sdk.domain.model.RewardableActivity
@@ -18,8 +17,6 @@ interface RewardingSdk {
     fun removeToken(callback: RemoveTokenCallback)
     fun getToken(callback: GetTokenCallback)
     fun recordRewardableActivity(rewardableActivities: List<RewardableActivity>, callback: RecordRewardableActivityCallback)
-    fun getCards(callback: GetCardsCallback)
-    fun redeemCard(cardId: String, callback: RedeemCardCallback)
 }
 
 interface RegisterUserCallback {
@@ -41,16 +38,6 @@ interface RecordRewardableActivityCallback {
     fun onSuccess()
 }
 
-interface GetCardsCallback {
-    fun onError()
-    fun onSuccess(cards: List<Card>)
-}
-
-interface RedeemCardCallback {
-    fun onError()
-    fun onSuccess()
-}
-
 class RewardingSdkImpl : RewardingSdk {
 
     companion object {
@@ -63,7 +50,7 @@ class RewardingSdkImpl : RewardingSdk {
 
         private lateinit var scope: CoroutineScope
 
-        fun init(context: Context) {
+        fun init(context: Context, apiUrl: String) {
             executor = Executor()
             job = SupervisorJob()
             scope = CoroutineScope(job + executor.main)
@@ -76,7 +63,7 @@ class RewardingSdkImpl : RewardingSdk {
                 )
             )
             commonRepository = CommonRepository(
-                CommonRemoteDataSource(localDataSource = commonLocalDataSource),
+                CommonRemoteDataSource(localDataSource = commonLocalDataSource, endPoint = apiUrl),
                 commonLocalDataSource
             )
         }
@@ -121,24 +108,6 @@ class RewardingSdkImpl : RewardingSdk {
     override fun recordRewardableActivity(rewardableActivities: List<RewardableActivity>, callback: RecordRewardableActivityCallback) {
         scope.launch {
             execute { commonRepository.recordRewardableActivity(rewardableActivities) }.fold(
-                error = { callback.onError() },
-                success = { callback.onSuccess() }
-            )
-        }
-    }
-
-    override fun getCards(callback: GetCardsCallback) {
-        scope.launch {
-            execute { commonRepository.getCards() }.fold(
-                error = { callback.onError() },
-                success = { callback.onSuccess(it) }
-            )
-        }
-    }
-
-    override fun redeemCard(cardId: String, callback: RedeemCardCallback) {
-        scope.launch {
-            execute { commonRepository.redeemCard(cardId) }.fold(
                 error = { callback.onError() },
                 success = { callback.onSuccess() }
             )

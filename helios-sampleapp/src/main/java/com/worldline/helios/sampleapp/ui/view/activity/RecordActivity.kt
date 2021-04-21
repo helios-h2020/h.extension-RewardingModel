@@ -1,7 +1,5 @@
 package com.worldline.helios.sampleapp.ui.view.activity
 
-import android.content.Context
-import android.content.Intent
 import android.widget.CheckBox
 import android.widget.Toast
 import com.wordline.helios.rewarding.sdk.domain.Action
@@ -19,10 +17,6 @@ import java.util.*
 
 
 class RecordActivity : RootActivity<RecordView>(), RecordView {
-
-    companion object {
-        fun intent(context: Context): Intent = Intent(context, CardsActivity::class.java)
-    }
 
     override val presenter by instance<RecordPresenter>()
     override val layoutResourceId: Int = R.layout.activity_record

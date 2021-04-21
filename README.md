@@ -52,8 +52,6 @@ interface RewardingSdk {
     fun getToken(callback: GetTokenCallback)
     fun removeToken(callback: RemoveTokenCallback)
     fun recordRewardableActivity(rewardableActivities: List<RewardableActivity>, callback: RecordRewardableActivityCallback)
-    fun getCards(callback: GetCardsCallback)
-    fun redeemCard(cardId: String, callback: RedeemCardCallback)
     fun cancel()
 }
 ```
@@ -61,8 +59,6 @@ interface RewardingSdk {
 *  The `getToken` method reads the access token stored into the Sharedpreferences, if any.
 *  The `removeToken` method removes the access token stored into the Sharedpreferences, if any.
 *  The `recordRewardableActivity` method calls the `/activities/record` API method. It registers the activity of the user accepting a list of RewardableActivity objects.
-*  The `getCards` method is used to call the `/cards` API method. It returns a list of available prepaid cards for the user.
-* The `redeemCard` method calls the `/cards/redeemedCard` API method. It removes an existing prepaid card by the giving `cardId`.
 *  The `cancel` method allows the app to stop any other running SDK process.  
 
 Each one of this methods receive a callback object that needs to be implemented in order to manage the server response. Each callback is called by the `onSuccess` method when everything is OK and by the `onError` method when something go wrong.  
@@ -94,20 +90,6 @@ interface RecordRewardableActivityCallback {
 }
 ```
 > The `recordRewardableActivity`does not return any data.
-```kotlin
-interface GetCardsCallback {
-    fun onError()
-    fun onSuccess(cards: List<Card>)
-}
-```
-> The `getCards` returns a collection of cards mapped by Card objects.
-```kotlin
-interface RedeemCardCallback {
-    fun onError()
-    fun onSuccess()
-}
-```
-> The `redeemCard` does not return any data.
 
 # Deepening
 
@@ -205,75 +187,3 @@ enum class Action(val value: String) {
     PUBLIC_CHAT_FORUM("actions_public-chat-forum")
 }
 ```
-
-## Get cards
-| SDK method |
-| ---------- |
-| `com.wordline.helios.rewarding.sdk.RewardingSdk.getCards` |
-
-| API method |
-| ---------- |
-| `/hrm-api/cards` |
-
-| SDK callback |
-| ------------ |
-| `com.wordline.helios.rewarding.sdk.GetCardsCallback` |
-
-| Model |
-| ----- |
-| `com.wordline.helios.rewarding.sdk.domain.model.Card` |
-
-This method returns a list of available prepaid cards for the user.
-
-### Example of use
-```kotlin
-    fun getCards() {
-        rewardingSdk.getCards(object: GetCardsCallback {
-            override fun onError() {
-                view.showError("error")
-            }
-
-            override fun onSuccess(cards: List<Card>) {
-                view.showList(cards)
-            }
-
-        })
-    }
-```
-The `onSuccess` callback method has a collection of Card objects as a parameter. Each `Card` has two attributes: `id` (the card identifyer) and `tokens` (the number of HLO of the reward).
-
-## Redeem card
-| SDK method |
-| ---------- |
-| `com.wordline.helios.rewarding.sdk.RewardingSdk.redeemCard` |
-
-| API method |
-| ---------- |
-| `/hrm-api/cards/redeemedCard` |
-
-| SDK callback |
-| ------------ |
-| `com.wordline.helios.rewarding.sdk.RedeemCardCallback` |
-
-| Model |
-| ----- |
-| None |
-
-This method removes an existing prepaid card from the database.
-
-### Example of use
-```kotlin
-    fun redeemCard(cardId: String) {
-        rewardingSdk.redeemCard(cardId, object: RedeemCardCallback {
-            override fun onError() {
-                view.showError("error")
-            }
-
-            override fun onSuccess() {
-                getCards()
-            }
-
-        })
-    }
-```
-In this example, the `onSuccess` callback method is used to refresh the list of available cards in the view.
