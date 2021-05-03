@@ -74,10 +74,10 @@ This project has two main components:
 The android SDK is oriented to help integrating the Reward Module to an existing Android app. The sample app helps to see a way to use the SDK on a Kotlin based app.
 
 ## Android SDK
-There is a main class called RewardingSdk that have all the methods needed to use the Rewarding Module API. There are also some callbacks that needs to be implemented in order to use those methods.
+There is a main class called RewardingSdk that have all the methods needed to use the Rewarding Module API. There are also some callbacks that needs to be implemented in order to use those methods. You can download the library file `aar` from the releases page <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
 
 ## Sample Android app
-This is a simple kotlin app that shows a way to use the SDK. It is made up of activities and presenters.
+This is a simple kotlin app that shows a way to use the SDK. It is made up of activities and presenters. You can download de application file `apk` from the releases page <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
 
 # Library usage
 
@@ -86,7 +86,7 @@ This is a simple kotlin app that shows a way to use the SDK. It is made up of ac
 * The minimum android version is 9 (Pie)
 * The app must grant the `android.permission.INTERNET` permission.
 ## Integration
-To use the Rewarding SDK, you need to copy the `.aar` file <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a> into your app's library directory. 
+To use the Rewarding SDK, you need to copy the `aar` file into your app's library directory. 
 Then, you need to add the following dependency to your app's gradle build file:
 ```gradle
 dependencies {
