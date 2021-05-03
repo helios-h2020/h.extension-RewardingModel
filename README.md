@@ -1,3 +1,5 @@
+<a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
+
 # Overview
 
 ## Helios decentralized Rewarding and Rating Model
@@ -84,7 +86,7 @@ This is a simple kotlin app that shows a way to use the SDK. It is made up of ac
 * The minimum android version is 9 (Pie)
 * The app must grant the `android.permission.INTERNET` permission.
 ## Integration
-To use the Rewarding SDK, you need to copy the `.aar` file ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic) into your app's library directory. 
+To use the Rewarding SDK, you need to copy the `.aar` file <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a> into your app's library directory. 
 Then, you need to add the following dependency to your app's gradle build file:
 ```gradle
 dependencies {
