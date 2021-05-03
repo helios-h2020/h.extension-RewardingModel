@@ -78,10 +78,12 @@ This project has two main components:
 The android SDK is oriented to help integrating the Reward Module to an existing Android app. The sample app helps to see a way to use the SDK on a Kotlin based app.
 
 ## Android SDK
-There is a main class called RewardingSdk that have all the methods needed to use the Rewarding Module API. There are also some callbacks that needs to be implemented in order to use those methods. You can download the library file `aar` from the releases page <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
+There is a main class called RewardingSdk that have all the methods needed to use the Rewarding Module API. There are also some callbacks that needs to be implemented in order to use those methods. You can download the library file `aar` from the releases page:
+<a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
 
 ## Sample Android app
-This is a simple kotlin app that shows a way to use the SDK. It is made up of activities and presenters. You can download de application file `apk` from the releases page <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
+This is a simple kotlin app that shows a way to use the SDK. It is made up of activities and presenters. You can download de application file `apk` from the releases page:
+<a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
 
 # Library usage
 
@@ -257,3 +259,12 @@ enum class Action(val value: String) {
     PUBLIC_CHAT_FORUM("actions_public-chat-forum")
 }
 ```
+# To develop
+
+## Prerequisites
+* Install Android Studio <a href="https://developer.android.com/studio/install"><img alt="GitHub" src="https://img.shields.io/badge/Android%20Studio-Install-brightgreen?style=plastic"></a>
+
+## Steps
+* Open or import the existing project with Android Studio.
+* Write your code in Kotlin.
+* To generate a new `aar` file of the SDK, select the Build option in the Menu Bar, then select ReBuild project or click the Make Project icon.
