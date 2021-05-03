@@ -62,6 +62,8 @@ There is a decentralized application of Helios in the Bloomen wallet:
 
 ![QR - Helios dApp](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/helios_qr.png?raw=true)
 
+***
+
 # Project structure
 This project has two main components:
 * An android SDK
