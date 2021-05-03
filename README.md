@@ -1,6 +1,6 @@
 <p>
     <a href="https://github.com/helios-h2020/h.extension-RewardingModel/releases"><img src="https://img.shields.io/github/v/release/helios-h2020/h.extension-RewardingModel?include_prereleases&style=plastic"/></a>
-    <a href="https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/helios-h2020/h.extension-RewardingModel"></a>
+    <a href="https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/helios-h2020/h.extension-RewardingModel?style=plastic"></a>
 </p>
 
 # Overview
