@@ -1,4 +1,66 @@
-# Helios RewardingStub
+# Overview
+
+## Helios decentralized Rewarding and Rating Model
+
+The main function of the decentralized reward system is to incentivize Helios users in the use of the platform. Users will be able to collect this incentive, in the form of a fungible token, and will be able to spend it for benefits within the platform (access to premium features, access to premium content, access to external services).
+
+Why a decentralized (blockchain-based) reward system?
+* An incentive system that is not dependent on a central issuer and has rules agreed by participants
+* A censorship-free and transparent incentive system
+
+The following figure shows the general scheme of the rewarding system:
+* A user of the Helios network performs an action on the network that may be a candidate to be rewardable (according to system rules)
+* The rewarding module manages the associated rules and incentives, confirms the rewardable action and applies the transfer of the corresponding tokens to the user's wallet
+* The reward wallet accumulates such tokens as a balance of points that the user can use for other uses as if it were an internal currency of the system
+
+![Diagram - general scheme](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/diagram1.png?raw=true)
+
+As users contribute with valuable content or performing some of the identified rewardable actions on the network, they will earn Helios tokens rewards that will be directly linked to their relevance as a contributor on the Helios network. All rewards will initially transact via the Quorum Network through smart contracts.
+
+A predetermined number of Helios tokens, based on the total daily activity directly linked with rewarding actions, will be issued at the end of each day as a Daily Reward Pool. An individual’s daily contribution will be determined by how much they contributed to the network that day relative to the entire community. This percentage will then be applied to the Daily Reward Pool to determine everyone’s daily token grants.
+
+The following table outlines the scoring weight applied to each rewardable action to determine user contribution and relevance to the network:
+
+![Table - Scores](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/table_scores.png?raw=true)
+
+Hereafter, we present the main factors defined for the rewarding algorithms:
+
+![Table - Algorithm factors](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/table_algorithm_factors.png?raw=true)
+
+The total contribution of a user in the Helios network for a Reward Period (initially set to 1 day) is the following:
+
+![Formula - Total contribution](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/formula1.png?raw=true)
+
+The Relevance of this user is related to the whole contribution performed by the rest of the users in the network for a Reward Period:
+
+![Formula - Relevance](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/formula2.png?raw=true)
+
+The number of tokens available for distribution to contributors in each Rewarding Period (reward mining) is based on a pre-set calculation but it also depends on the number of active users contributing to the network:
+
+![Formula - Total amount](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/formula3.png?raw=true) ![Formula - Total amount](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/formula3.5.png?raw=true)
+
+Finally, the amount of Helios tokens that are transferred to each user’s wallet depend on the token production (reward mining) generated every Rewarding Period by Helios in the following way:
+
+![Formula - HLO](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/formula4.png?raw=true)
+
+## Utility of the Helios Token
+
+Helios users will collect Helios rewarding tokens through the performance of activities and actions that are tagged as rewardable. These tokens will be collected in their mobile applications within a wallet module that will store the balance of tokens and the capability to transfer a partial or total amount in exchange of benefits accessible to each use case. We describe initial token utilities that will be defined within the scope of the different contexts and use cases where this token may be spent:
+* Access to premium content
+* Access to external services as a discount on the final price
+* Content promotion
+* Promotional campaigns for external services
+* Platform development governance (voting on new features and product roadmap)
+
+For more information you can download  D4.4 Rewarding Strategies.
+
+## Wallet for HLO
+
+There is a decentralized application of Helios in the Bloomen wallet:
+* Bloomen wallet: https://play.google.com/store/apps/details?id=com.tempos21.bloomen&hl=es&gl=US
+* Helios dApp QR:
+
+![QR - Helios dApp](https://github.com/helios-h2020/h.extension-RewardingModel/blob/master/wiki-images/helios_qr.png?raw=true)
 
 # Project structure
 This project has two main components:
